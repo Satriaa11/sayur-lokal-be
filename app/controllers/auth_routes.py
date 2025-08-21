@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.auth_controller import (
+from .auth_controller import (
     register_buyer_route,
     register_seller_route,
     login_route,

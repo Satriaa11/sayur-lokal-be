@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.user_controller import (
+from .user_controller import (
     get_current_user,
     update_buyer_profile,
     update_seller_profile,

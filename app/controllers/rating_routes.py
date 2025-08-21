@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.rating_controller import (
+from .rating_controller import (
     create_rating_endpoint,
     update_rating_endpoint,
     delete_rating_endpoint,

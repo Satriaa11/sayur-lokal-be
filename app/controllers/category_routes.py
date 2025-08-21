@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.category_controller import (
+from .category_controller import (
     get_all_categories,
     get_category_by_id,
     get_category_with_products,

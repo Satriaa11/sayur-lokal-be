@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.order_controller import (
+from .order_controller import (
     create_order,
     get_order,
     get_buyer_orders,
