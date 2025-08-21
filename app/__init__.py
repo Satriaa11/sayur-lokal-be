@@ -19,7 +19,7 @@ def create_app(config_class=ProductionConfig):
     app.config.from_object(config_class)
 
     # Initialize CORS
-    CORS(app, 
+    CORS(app,
          origins=app.config.get('CORS_ORIGINS', ["*"]),
          methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
          allow_headers=[

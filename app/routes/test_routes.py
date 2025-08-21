@@ -12,7 +12,7 @@ def test_cors():
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, PATCH, OPTIONS'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
         return response
-        
+
     return jsonify({
         "success": True,
         "message": "CORS is working correctly!",
@@ -35,7 +35,7 @@ def health_check():
         response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
         return response
-        
+
     return jsonify({
         "status": "healthy",
         "cors_enabled": True,
@@ -51,9 +51,9 @@ def auth_test():
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         return response
-        
+
     auth_header = request.headers.get('Authorization')
-    
+
     return jsonify({
         "success": True,
         "message": "Auth test endpoint",

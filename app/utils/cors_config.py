@@ -4,9 +4,9 @@ from functools import wraps
 
 def init_cors(app):
     """Initialize CORS with environment-specific configuration"""
-    
+
     origins = app.config.get('CORS_ORIGINS', ["*"])
-    
+
     # Enhanced CORS configuration
     CORS(app,
          origins=origins,
@@ -14,7 +14,7 @@ def init_cors(app):
          allow_headers=[
              "Content-Type",
              "Authorization",
-             "Access-Control-Allow-Credentials", 
+             "Access-Control-Allow-Credentials",
              "X-Requested-With",
              "Accept",
              "Origin",
@@ -25,13 +25,13 @@ def init_cors(app):
          max_age=3600,
          expose_headers=["Content-Range", "X-Content-Range"]
     )
-    
+
     return app
 
 def add_cors_headers(response):
     """Manually add CORS headers if needed"""
     origin = request.headers.get('Origin')
-    
+
     # List of allowed origins
     allowed_origins = [
         "http://localhost:3000",
@@ -42,15 +42,15 @@ def add_cors_headers(response):
         "http://127.0.0.1:8080",
         "https://your-frontend-domain.com"
     ]
-    
+
     if origin in allowed_origins or origin is None:
         response.headers['Access-Control-Allow-Origin'] = origin or '*'
-    
+
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, PATCH, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With, Accept, Origin'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = '3600'
-    
+
     return response
 
 def cors_enabled(f):
@@ -61,10 +61,10 @@ def cors_enabled(f):
         if request.method == 'OPTIONS':
             response = jsonify({'status': 'OK'})
             return add_cors_headers(response)
-        
+
         # Handle actual request
         response = f(*args, **kwargs)
-        
+
         # Add CORS headers to response
         if hasattr(response, 'headers'):
             return add_cors_headers(response)
@@ -72,7 +72,7 @@ def cors_enabled(f):
             # If response is not a Response object, create one
             resp = jsonify(response) if not isinstance(response, tuple) else response
             return add_cors_headers(resp)
-    
+
     return decorated_function
 
 def handle_preflight():
